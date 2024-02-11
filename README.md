@@ -41,7 +41,7 @@ The generator loss motivates the generator to create images that the discriminat
 This loss function evaluates the difference in feature representations between the real and generated images. By minimizing this loss, the generator is trained to create images that not only fool the discriminator but also closely resemble the feature distribution of real images, enhancing the visual quality of the generated images.
 
 
-![Figure 3](Figures/Figure3.png)
+![Figure 3](Figures/Figure3-removebg-preview.png)
 
 
 ### Step 2: Adversarial Training
