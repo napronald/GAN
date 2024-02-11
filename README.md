@@ -29,7 +29,7 @@ A Generative Adversarial Network (GAN) is trained using WGAN-GP (Wasserstein GAN
 - Initial warming up of the generator is employed to kickstart the GAN's learning process.
 - By kickstarting the generator, we aim to produce initial synthetic images that already bear some resemblance to the target dataset, thus improving the efficiency of the subsequent epochs
 
-![Figure 1](Figures/Figure1.png)
+![Figure 1](Figures/fig1.png)
 
 **Generator Loss:**
 The generator loss motivates the generator to create images that the discriminator will classify as real. It is a measure of the generator's success in deceiving the discriminator, and minimizing this loss improves the generator's ability to produce realistic images.
@@ -49,7 +49,7 @@ This loss function evaluates the difference in feature representations between t
 - Initially employed Binary Cross-Entropy (BCE) loss for training encountered mode collapse issues.
 - Transitioned to Wasserstein loss integrated with Gradient Penalty (GP) for enhanced stability and quality in generated images.
 
-![Figure 2](Figures/Figure2.png)
+![Figure 2](Figures/fig2.png)
 
 **Minimax Loss:**
 The foundational concept behind the adversarial training of GANs, representing a zero-sum game between the generator (G) and the discriminator (D).
