@@ -26,22 +26,21 @@ A Generative Adversarial Network (GAN) is trained using WGAN-GP (Wasserstein GAN
 
 ### Step 1: Warming Up Generator
 
+![Figure 1](Figures/Figure1.png)
+
 - Initial warming up of the generator is employed to kickstart the GAN's learning process.
 - By kickstarting the generator, we aim to produce initial synthetic images that already bear some resemblance to the target dataset, thus improving the efficiency of the subsequent epochs
-
-![Figure 1](Figures/fig1.png)
-
-**Generator Loss:**
-The generator loss motivates the generator to create images that the discriminator will classify as real. It is a measure of the generator's success in deceiving the discriminator, and minimizing this loss improves the generator's ability to produce realistic images.
-
-![Figure 2](Figures/Figure2.png)
 
 
 **Perceptual Loss:**
 This loss function evaluates the difference in feature representations between the real and generated images. By minimizing this loss, the generator is trained to create images that not only fool the discriminator but also closely resemble the feature distribution of real images, enhancing the visual quality of the generated images.
 
+![Figure 2](Figures/Figure2.png)
 
-![Figure 3](Figures/Figure3-removebg-preview.png)
+
+**Generator Loss:**
+The generator loss motivates the generator to create images that the discriminator will classify as real. It is a measure of the generator's success in deceiving the discriminator, and minimizing this loss improves the generator's ability to produce realistic images.
+![Figure 3](Figures/Figure3.png)
 
 
 ### Step 2: Adversarial Training
@@ -49,7 +48,7 @@ This loss function evaluates the difference in feature representations between t
 - Initially employed Binary Cross-Entropy (BCE) loss for training encountered mode collapse issues.
 - Transitioned to Wasserstein loss integrated with Gradient Penalty (GP) for enhanced stability and quality in generated images.
 
-![Figure 2](Figures/fig2.png)
+![Figure 2](Figures/Figure4.png)
 
 **Minimax Loss:**
 The foundational concept behind the adversarial training of GANs, representing a zero-sum game between the generator (G) and the discriminator (D).
@@ -73,12 +72,11 @@ $$L_{\text{GP}} = \left(\left\lVert \nabla_{\hat{x}} D(\hat{x}) \right\rVert_2 -
 
 ### Step 3: Classifier-Guided Refinement
 
+![Figure 2](Figures/Figure5.png)
+
 - The GAN-generated images are evaluated by the CNN classifier to ensure they are of high enough quality to be used for training. The classifier's confidence levels are used to filter out less convincing images.
-
-## Data Update + CNN Classifier
-
-- The high-confidence synthetic images are added to the training dataset, and the CNN classifier is retrained to incorporate the diversity of the new data.
 - This process is iterated, with each cycle improving the classifier's performance and the GAN's synthetic image quality.
+
 
 ## Findings
 
