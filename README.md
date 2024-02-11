@@ -54,8 +54,8 @@ The generator loss motivates the generator to create images that the discriminat
 
 <table>
   <tr>
-    <td><img src="https://github.com/napronald/GAN/blob/main/Figures/Figure3.png" alt="Figure 1" /></td>
-    <td><img src="https://github.com/napronald/GAN/blob/main/Figures/Figure4.png" alt="Figure 2" /></td>
+    <td><img src="https://github.com/napronald/GAN/blob/main/Figures/Figure5.png" alt="Figure 1" /></td>
+    <td><img src="https://github.com/napronald/GAN/blob/main/Figures/Figure6.png" alt="Figure 2" /></td>
   </tr>
 </table>
 
@@ -66,7 +66,7 @@ The generator loss motivates the generator to create images that the discriminat
 
 ### Classifier-Guided Refinement
 
-![Figure 2](Figures/Figure5.png)
+![Figure 2](Figures/Figure7.png)
 
 - The GAN-generated images are evaluated by the CNN classifier to ensure they are of high enough quality to be used for training. The classifier's confidence levels are used to filter out less convincing images.
 - This process is iterated, with each cycle improving the classifier's performance and the GAN's synthetic image quality.
@@ -77,12 +77,8 @@ The generator loss motivates the generator to create images that the discriminat
 - The iterative refinement process leads to a measurable improvement in the CNN classifier's performance.
 - The project demonstrates that GAN-generated images can effectively supplement a limited dataset, leading to better generalization and robustness of the classifier.
 
-<table>
-  <tr>
-    <td><img src="https://github.com/napronald/GAN/blob/main/Figures/Figure3.png" alt="Figure 1" /></td>
-    <td><img src="https://github.com/napronald/GAN/blob/main/Figures/Figure4.png" alt="Figure 2" /></td>
-  </tr>
-</table>
+![Figure 2](Figures/Figure8.png)
+
 
 
 ## Future Directions
