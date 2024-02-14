@@ -2,17 +2,12 @@ import torch
 import pandas as pd
 import numpy as np
 import torch.nn as nn
-import torch.optim as optim
-from torch.utils.data import DataLoader, Dataset
-from torchvision import transforms
-
-from sklearn.model_selection import train_test_split
-from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms
 from PIL import Image
-import torch
-import torch.nn as nn
 import torch.optim as optim
+from torchvision import transforms
+from torch.utils.data import DataLoader, Dataset
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import precision_recall_fscore_support, confusion_matrix
 
 
 class EmotionDataset(Dataset):
@@ -83,6 +78,7 @@ class Classifier:
         self.best_val_loss = np.inf
         self.best_model_path = "best_model.pth"
 
+
     def train(self):
         for epoch in range(self.epochs):
             running_loss = 0.0
@@ -112,6 +108,7 @@ class Classifier:
                 self.best_val_loss = val_loss
                 torch.save(self.model.state_dict(), self.best_model_path)
 
+
     def validate(self):
         self.model.eval()
         total_loss = 0.0
@@ -131,12 +128,15 @@ class Classifier:
         print(f'Validation Accuracy: {validation_accuracy}%, Validation Loss: {total_loss / len(self.val_loader)}')
         return total_loss / len(self.val_loader)
 
+
     def test(self):
         self.model.load_state_dict(torch.load(self.best_model_path))
         self.model.eval()
         total_loss = 0.0
         total = 0
         correct = 0
+        all_labels = []
+        all_predictions = []
         with torch.no_grad():
             for images, labels in self.test_loader:
                 images, labels = images.to(self.device), labels.to(self.device)
@@ -146,9 +146,14 @@ class Classifier:
                 _, predicted = torch.max(outputs.data, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
+                all_labels.extend(labels.cpu().numpy())
+                all_predictions.extend(predicted.cpu().numpy())
         
         test_accuracy = 100 * correct / total
-        print(f'Test Accuracy: {test_accuracy}%, Test Loss: {total_loss/len(self.test_loader)}')
+        precision, recall, f1_score, _ = precision_recall_fscore_support(all_labels, all_predictions, average='macro')
+        cm = confusion_matrix(all_labels, all_predictions)
+        print(f'Test Accuracy: {test_accuracy}%, Test Loss: {total_loss/len(self.test_loader)}, Macro F1 Score: {f1_score}')
+        print('Test Confusion Matrix:\n', cm)
 
 
 model_trainer = Classifier(batch_size=256, learning_rate=0.001, epochs=25)
